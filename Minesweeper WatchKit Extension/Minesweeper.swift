@@ -1,6 +1,6 @@
 import Foundation
 
-struct Point : Equatable{
+struct Point : Equatable, Hashable {
    
     var x: Int
     var y: Int
@@ -11,9 +11,6 @@ struct Point : Equatable{
     }
 }
 
-func ==(lhs: Point, rhs: Point) -> Bool {
-    return lhs.x == rhs.x && lhs.y == rhs.y
-}
 
 struct Cell {
     var isMine = false
@@ -35,7 +32,6 @@ class MineField {
         self.height = height
         mineCount = Int(sqrt(Double(width * height)))
         for _ in 0..<height {
-            //create row
             var row = [Cell]()
             for _ in 0..<width {
                 row.append(Cell())
@@ -62,16 +58,16 @@ class MineField {
     
     
     private func determineMinesWithStart(point: Point){
-        populateMines(mineCount, avoidingPoint: point)
+        populateMines(mineCount, avoiding: point)
         populateAdjacentMineCount()
     }
     
-    private func populateMines(_ count: Int, avoidingPoint startPoint: Point){
-        var mineLocations = [Point]()
+    private func populateMines(_ count: Int, avoiding point: Point){
+        var mineLocations = Set<Point>()
         repeat {
             let randPoint = getRandomPoint()
-            if startPoint != randPoint && !mineLocations.contains(randPoint){
-                mineLocations.append(randPoint)
+            if point != randPoint && !mineLocations.contains(randPoint){
+                mineLocations.insert(randPoint)
             }
         } while mineLocations.count < count
         
@@ -80,20 +76,20 @@ class MineField {
         }
     }
     
-    func mineLocations() -> [Point] {
-        var mines = [Point]()
+    func mineLocations() -> Set<Point> {
+        var mines = Set<Point>()
         for y in 0..<field.count {
             for x in 0..<field[y].count{
                 if field[y][x].isMine {
-                    mines.append(Point(x: x, y: y))
+                    mines.insert(Point(x: x, y: y))
                 }
             }
         }
         return mines
     }
     
-    private func neighboursFor(_ point: Point) -> [Point] {
-        var neighbours = [Point]()
+    private func neighboursFor(_ point: Point) -> Set<Point> {
+        var neighbours = Set<Point>()
         let minX = max(0,point.x - 1)
         let maxX = min(width-1,point.x + 1)
         let minY = max(0, point.y-1)
@@ -102,32 +98,21 @@ class MineField {
         for x in minX...maxX {
             for y in minY...maxY {
                 if !(point.x == x && point.y == y) {
-                    neighbours.append(Point(x: x, y: y))
+                    neighbours.insert(Point(x: x, y: y))
                 }
             }
         }
         return neighbours
     }
     
-    private func countMinesAt(points: [Point]) -> Int{
-        
-        return points.reduce(0, {$0 + (field[$1.y][$1.x].isMine ? 1 : 0)})
-        
-//        var count = 0
-//        for point in points {
-//            if field[point.y][point.x].isMine{
-//                count += 1
-//            }
-//        }
-//        return count
+    private func adjacementMineCount(for point: Point) -> Int{
+        return neighboursFor(point).reduce(0, {$0 + (field[$1.y][$1.x].isMine ? 1 : 0)})
     }
     
     private func populateAdjacentMineCount(){
         for y in 0..<field.count {
             for x in 0..<field[y].count{
-                let neighbours = neighboursFor(Point(x: x, y: y))
-                let nearbyMines = countMinesAt(points: neighbours)
-                field[y][x].adjacentMineCount = nearbyMines
+                field[y][x].adjacentMineCount = adjacementMineCount(for: Point(x: x, y: y))
             }
         }
     }
