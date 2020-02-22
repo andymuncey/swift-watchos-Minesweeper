@@ -1,11 +1,3 @@
-//
-//  ExtensionDelegate.swift
-//  Minesweeper WatchKit Extension
-//
-//  Created by Andrew Muncey on 22/02/2020.
-//  Copyright © 2020 Andrew Muncey. All rights reserved.
-//
-
 import WatchKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {

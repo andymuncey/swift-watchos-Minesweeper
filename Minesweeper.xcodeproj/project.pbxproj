@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		BB0212D52401B9FA0016EC0F /* Minesweeper WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = BB0212D42401B9FA0016EC0F /* Minesweeper WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		BB0212DB2401B9FA0016EC0F /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB0212D92401B9FA0016EC0F /* Interface.storyboard */; };
 		BB0212DD2401B9FE0016EC0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0212DC2401B9FE0016EC0F /* Assets.xcassets */; };
 		BB0212E42401B9FF0016EC0F /* Minesweeper WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BB0212E32401B9FF0016EC0F /* Minesweeper WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BB0212E92401B9FF0016EC0F /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0212E82401B9FF0016EC0F /* InterfaceController.swift */; };
 		BB0212EB2401B9FF0016EC0F /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0212EA2401B9FF0016EC0F /* ExtensionDelegate.swift */; };
 		BB0212ED2401B9FF0016EC0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0212EC2401B9FF0016EC0F /* Assets.xcassets */; };
+		BB0212FF2401BAA00016EC0F /* Minesweeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0212FE2401BAA00016EC0F /* Minesweeper.swift */; };
+		BB0213012401BAD10016EC0F /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB0213002401BAD10016EC0F /* Interface.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +62,6 @@
 /* Begin PBXFileReference section */
 		BB0212D02401B9FA0016EC0F /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB0212D42401B9FA0016EC0F /* Minesweeper WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minesweeper WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB0212DA2401B9FA0016EC0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		BB0212DC2401B9FE0016EC0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB0212DE2401B9FE0016EC0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB0212E32401B9FF0016EC0F /* Minesweeper WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Minesweeper WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +69,8 @@
 		BB0212EA2401B9FF0016EC0F /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		BB0212EC2401B9FF0016EC0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB0212EE2401B9FF0016EC0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB0212FE2401BAA00016EC0F /* Minesweeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Minesweeper.swift; sourceTree = "<group>"; };
+		BB0213002401BAD10016EC0F /* Interface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +106,7 @@
 		BB0212D82401B9FA0016EC0F /* Minesweeper WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
-				BB0212D92401B9FA0016EC0F /* Interface.storyboard */,
+				BB0213002401BAD10016EC0F /* Interface.storyboard */,
 				BB0212DC2401B9FE0016EC0F /* Assets.xcassets */,
 				BB0212DE2401B9FE0016EC0F /* Info.plist */,
 			);
@@ -114,6 +116,7 @@
 		BB0212E72401B9FF0016EC0F /* Minesweeper WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				BB0212FE2401BAA00016EC0F /* Minesweeper.swift */,
 				BB0212E82401B9FF0016EC0F /* InterfaceController.swift */,
 				BB0212EA2401B9FF0016EC0F /* ExtensionDelegate.swift */,
 				BB0212EC2401B9FF0016EC0F /* Assets.xcassets */,
@@ -229,8 +232,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB0213012401BAD10016EC0F /* Interface.storyboard in Resources */,
 				BB0212DD2401B9FE0016EC0F /* Assets.xcassets in Resources */,
-				BB0212DB2401B9FA0016EC0F /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB0212FF2401BAA00016EC0F /* Minesweeper.swift in Sources */,
 				BB0212EB2401B9FF0016EC0F /* ExtensionDelegate.swift in Sources */,
 				BB0212E92401B9FF0016EC0F /* InterfaceController.swift in Sources */,
 			);
@@ -268,17 +272,6 @@
 			targetProxy = BB0212E52401B9FF0016EC0F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		BB0212D92401B9FA0016EC0F /* Interface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BB0212DA2401B9FA0016EC0F /* Base */,
-			);
-			name = Interface.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		BB0212EF2401B9FF0016EC0F /* Debug */ = {
