@@ -65,7 +65,7 @@ class MineField {
     private func populateMines(_ count: Int, avoiding point: Point){
         var mineLocations = Set<Point>()
         repeat {
-            let randPoint = getRandomPoint()
+            let randPoint = randomPoint()
             if point != randPoint && !mineLocations.contains(randPoint){
                 mineLocations.insert(randPoint)
             }
@@ -117,9 +117,7 @@ class MineField {
         }
     }
     
-    private func getRandomPoint() -> Point{
-        let x = Int.random(in: 0..<width)
-        let y = Int.random(in: 0..<height)
-        return Point(x: x, y: y)
+    private func randomPoint() -> Point{
+        return Point(x: Int.random(in: 0..<width), y: Int.random(in: 0..<height))
     }
 }

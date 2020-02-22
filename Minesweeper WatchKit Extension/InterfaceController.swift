@@ -69,7 +69,7 @@ class InterfaceController: WKInterfaceController {
     @IBAction func checkMine4_4() { check(Point(x: 4, y: 4)) }
     
     @IBAction func resetPressed() {
-        if flagging {toggleFlagging()}
+        if flagging {toggleFlaggingState()}
         
         setup()
         for row in mineButtons {
@@ -80,7 +80,7 @@ class InterfaceController: WKInterfaceController {
         updateMineCountLabel()
     }
     
-    @IBAction func toggleFlagging() {
+    @IBAction func toggleFlaggingState() {
         if minefield.hasStarted{
             flagging.toggle()
             flagButton.setBackgroundColor(flagging ? UIColor.red : UIColor.clear)
