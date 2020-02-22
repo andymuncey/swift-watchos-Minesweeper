@@ -15,7 +15,7 @@ func ==(lhs: Point, rhs: Point) -> Bool {
     return lhs.x == rhs.x && lhs.y == rhs.y
 }
 
-struct MineInfo {
+struct Cell {
     var isMine = false
     var adjacentMineCount = 0
 }
@@ -25,7 +25,7 @@ class MineField {
     private(set) var hasStarted = false
     private(set) var isExploded = false
     private(set) var mineCount : Int
-    private var field = Array<Array<MineInfo>>()
+    private var field = Array<Array<Cell>>()
     
     private var width: Int
     private var height: Int
@@ -36,15 +36,15 @@ class MineField {
         mineCount = Int(sqrt(Double(width * height)))
         for _ in 0..<height {
             //create row
-            var row = [MineInfo]()
+            var row = [Cell]()
             for _ in 0..<width {
-                row.append(MineInfo())
+                row.append(Cell())
             }
             field.append(row)
         }
     }
     
-    func checkMine(_ point: Point) -> MineInfo{
+    func checkMine(_ point: Point) -> Cell{
         if !hasStarted{
             hasStarted = true
             determineMinesWithStart(point: point)
@@ -54,10 +54,10 @@ class MineField {
         if location.isMine {
             isExploded = true
         }
-        var mineInfo = MineInfo()
-        mineInfo.adjacentMineCount = location.adjacentMineCount
-        mineInfo.isMine = location.isMine
-        return mineInfo
+        var cell = Cell()
+        cell.adjacentMineCount = location.adjacentMineCount
+        cell.isMine = location.isMine
+        return cell
     }
     
     
@@ -69,7 +69,7 @@ class MineField {
     private func populateMines(_ count: Int, avoidingPoint startPoint: Point){
         var mineLocations = [Point]()
         repeat {
-            let randPoint = getRandomPoint(width: width, height: height)
+            let randPoint = getRandomPoint()
             if startPoint != randPoint && !mineLocations.contains(randPoint){
                 mineLocations.append(randPoint)
             }
@@ -92,7 +92,7 @@ class MineField {
         return mines
     }
     
-    private func validNeighboursFor(point: Point) -> [Point] {
+    private func neighboursFor(_ point: Point) -> [Point] {
         var neighbours = [Point]()
         let minX = max(0,point.x - 1)
         let maxX = min(width-1,point.x + 1)
@@ -125,15 +125,14 @@ class MineField {
     private func populateAdjacentMineCount(){
         for y in 0..<field.count {
             for x in 0..<field[y].count{
-                
-                let neighbours = validNeighboursFor(point: Point(x: x, y: y))
+                let neighbours = neighboursFor(Point(x: x, y: y))
                 let nearbyMines = countMinesAt(points: neighbours)
                 field[y][x].adjacentMineCount = nearbyMines
             }
         }
     }
     
-    private func getRandomPoint(width: Int, height: Int) -> Point{
+    private func getRandomPoint() -> Point{
         let x = Int.random(in: 0..<width)
         let y = Int.random(in: 0..<height)
         return Point(x: x, y: y)

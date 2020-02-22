@@ -1,5 +1,4 @@
 import WatchKit
-import Foundation
 
 class InterfaceController: WKInterfaceController {
     
@@ -71,15 +70,13 @@ class InterfaceController: WKInterfaceController {
     
     @IBAction func resetPressed() {
         if flagging {toggleFlagging()}
-        minefield = MineField(width: 5, height: 5)
         
+        setup()
         for row in mineButtons {
             for cell in row {
                 cell.setTitle("")
             }
         }
-        flaggedCells = Set<WKInterfaceButton>()
-        clearedCells = Set<WKInterfaceButton>()
         updateMineCountLabel()
     }
     
@@ -90,11 +87,17 @@ class InterfaceController: WKInterfaceController {
         }
     }
     
+    func setup(){
+        minefield = MineField(width: 5, height: 5)
+        flaggedCells = Set<WKInterfaceButton>()
+        clearedCells = Set<WKInterfaceButton>()
+    }
+    
     private var flagging = false
-    private var mineButtons = Array<Array<WKInterfaceButton>>()
-    private var minefield = MineField(width: 5, height: 5)
-    private var flaggedCells = Set<WKInterfaceButton>()
-    private var clearedCells = Set<WKInterfaceButton>()
+    private var mineButtons : Array<Array<WKInterfaceButton>>!
+    private var minefield : MineField!
+    private var flaggedCells : Set<WKInterfaceButton>!
+    private var clearedCells : Set<WKInterfaceButton>!
     
     private func check(_ point: Point){
         
@@ -161,6 +164,9 @@ class InterfaceController: WKInterfaceController {
     }
     
     override func awake(withContext context: Any?) {
+        setup()
+        
+        mineButtons = Array<Array<WKInterfaceButton>>()
         for _ in 0..<5 {
             mineButtons.append([WKInterfaceButton]())
         }
