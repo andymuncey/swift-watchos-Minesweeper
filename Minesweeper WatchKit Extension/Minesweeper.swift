@@ -2,8 +2,8 @@ import Foundation
 
 struct Point : Equatable, Hashable {
    
-    var x: Int
-    var y: Int
+    let x: Int
+    let y: Int
     
     init(x: Int, y: Int){
         self.x = x
@@ -21,11 +21,11 @@ class MineField {
     
     private(set) var hasStarted = false
     private(set) var isExploded = false
-    private(set) var mineCount : Int
+    let mineCount : Int
     private var field = Array<Array<Cell>>()
     
-    private var width: Int
-    private var height: Int
+    let width: Int
+    let height: Int
     
     init(width: Int, height: Int){
         self.width = width
